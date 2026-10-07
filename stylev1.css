@@ -1,4 +1,4 @@
- /* ==========================================================================
+/* ==========================================================================
            1. RESET & BASE STYLES
            ========================================================================== */
         *, *::before, *::after {
@@ -28,6 +28,46 @@
             body {
                 padding-bottom: 3rem;
             }
+        }
+
+  /* CSS Tambahan untuk Logika Halaman/Tab Native */
+        .app-page {
+            display: none;
+            animation: fadeInTab 0.3s ease forwards;
+            padding-bottom: 10px; /* Jarak agar konten terbawah tidak tertutup bottom nav */
+        }
+        .app-page.active-page {
+            display: block;
+        }
+        @keyframes fadeInTab {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* NEW: Modifikasi Header Minimalist untuk halaman Status, Riwayat, Video */
+        .header.header-minimal {
+            position: sticky !important;
+            top: 0;
+            margin-bottom: 2rem;
+            z-index: 50;
+            border-radius: 0 !important;
+            padding: 12px 16px !important; /* Tinggi pas dengan form search */
+            height: auto !important;
+            background: #0f172a !important; /* Menyesuaikan warna tema */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        /* Sembunyikan elemen yang tidak diperlukan di mode minimal */
+        .header.header-minimal .header-blob-1,
+        .header.header-minimal .header-blob-2,
+        .header.header-minimal .header-top-bar {
+            display: none !important;
+        }
+        .header.header-minimal .header-container {
+            padding: 0 !important;
+            min-height: auto !important;
+        }
+        .header.header-minimal .search-container {
+            margin-top: 0 !important;
         }
 
         ::selection {
@@ -2125,3 +2165,590 @@
 
         .toast-msg.success { border-left: 4px solid #10b981; }
         .toast-msg.info { border-left: 4px solid #3b82f6; }
+
+ /* ========================================== */
+        /* TIKTOK STYLE VIDEO FEED CSS                */
+        /* ========================================== */
+        .tiktok-feed-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            width:100%;
+            padding: ;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .tiktok-card {
+            position: relative;
+            width: 100%;
+            height: 72vh;
+            min-height: 520px;
+            max-height: 680px;
+            background-color: #0f172a;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 12px 28px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .tiktok-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        .tiktok-overlay-gradient {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(0, 0, 0, 0.35) 0%,
+                transparent 25%,
+                transparent 60%,
+                rgba(0, 0, 0, 0.85) 100%
+            );
+            pointer-events: none;
+        }
+
+        /* Top Header Info inside Card */
+        .tiktok-top-bar {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            right: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .tiktok-badge {
+            padding: 0.35rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .tiktok-badge.red { background: rgba(220, 38, 38, 0.85); }
+        .tiktok-badge.blue { background: rgba(37, 99, 235, 0.85); }
+        .tiktok-badge.amber { background: rgba(217, 119, 6, 0.85); }
+
+        .tiktok-sound-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        .tiktok-sound-btn:active {
+            transform: scale(0.9);
+        }
+
+        /* Action Buttons Right Sidebar */
+        .tiktok-actions {
+            position: absolute;
+            right: 0.85rem;
+            bottom: 2.2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.125rem;
+            z-index: 10;
+        }
+
+        .tiktok-action-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: none;
+            border: none;
+            color: #ffffff;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .tiktok-action-btn:active {
+            transform: scale(0.85);
+        }
+
+        .tiktok-icon-circle {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(15, 23, 42, 0.55);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.15rem;
+            margin-bottom: 0.2rem;
+            transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .tiktok-action-btn.liked .tiktok-icon-circle {
+            color: #ef4444;
+            background: rgba(239, 68, 68, 0.25);
+            border-color: #ef4444;
+            transform: scale(1.1);
+        }
+
+        .tiktok-action-btn.bookmarked .tiktok-icon-circle {
+            color: #f59e0b;
+            background: rgba(245, 158, 11, 0.25);
+            border-color: #f59e0b;
+            transform: scale(1.1);
+        }
+
+        .tiktok-action-count {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+        }
+
+        /* Audio Disk Spinning Animation */
+        .tiktok-audio-disc {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: #1e293b;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: rotateDisc 4s linear infinite;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            overflow: hidden;
+            margin-top: 0.25rem;
+        }
+
+        .tiktok-audio-disc img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @keyframes rotateDisc {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Bottom Caption Info Overlay */
+        .tiktok-bottom-info {
+            position: absolute;
+            bottom: 1.25rem;
+            left: 1rem;
+            right: 4.5rem;
+            z-index: 10;
+            color: #ffffff;
+        }
+
+        .tiktok-user-row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .tiktok-avatar {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: 2px solid #ef4444;
+            object-fit: cover;
+        }
+
+        .tiktok-username {
+            font-weight: 800;
+            font-size: 0.875rem;
+            color: #ffffff;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+        }
+
+        .tiktok-badge-verified {
+            color: #3b82f6;
+            font-size: 0.75rem;
+        }
+
+        .tiktok-caption {
+            font-size: 0.8rem;
+            line-height: 1.35;
+            color: #f1f5f9;
+            margin-bottom: 0.5rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+        }
+
+        .tiktok-music-track {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.725rem;
+            color: #cbd5e1;
+            font-weight: 500;
+        }
+
+        /* Play/Pause Overlay Indicator */
+        .tiktok-play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.7);
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(6px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 1.75rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.25s ease;
+            z-index: 15;
+        }
+
+        .tiktok-play-overlay.show {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        
+        /* ========================================== */
+        /* NEW: MODERN NEWS FEED CSS                  */
+        /* ========================================== */
+        .modern-news-hero {
+            position: relative; 
+            border-radius: 1.25rem; 
+            overflow: hidden; 
+            height: 240px; 
+            margin-bottom: 1.5rem; 
+            box-shadow: 0 12px 25px -5px rgba(0,0,0,0.3); 
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+        }
+        .modern-news-hero:active { 
+            transform: scale(0.96); 
+        }
+        .modern-news-hero img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            transition: transform 0.5s ease;
+        }
+        .modern-news-hero:hover img {
+            transform: scale(1.05);
+        }
+        .modern-news-overlay { 
+            position: absolute; 
+            inset: 0; 
+            background: linear-gradient(to top, rgba(15,23,42,0.95) 5%, rgba(15,23,42,0.4) 50%, transparent 100%); 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: flex-end; 
+            padding: 1.25rem; 
+        }
+        .modern-badge { 
+            align-self: flex-start; 
+            background: rgba(220, 38, 38, 0.85); 
+            color: white; 
+            padding: 0.35rem 0.85rem; 
+            border-radius: 9999px; 
+            font-size: 0.7rem; 
+            font-weight: 800; 
+            margin-bottom: 0.75rem; 
+            backdrop-filter: blur(8px); 
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .modern-news-title { 
+            color: #ffffff; 
+            font-weight: 800; 
+            font-size: 1.15rem; 
+            line-height: 1.35; 
+            margin-bottom: 0.4rem; 
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5); 
+        }
+        .modern-news-meta { 
+            color: #cbd5e1; 
+            font-size: 0.75rem; 
+            display: flex; 
+            gap: 12px; 
+            align-items: center; 
+            font-weight: 500;
+        }
+        
+        .modern-news-list { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 1.1rem; 
+        }
+        .modern-news-item { 
+            display: flex; 
+            gap: 1rem; 
+            background: #ffffff; 
+            padding: 0.85rem; 
+            border-radius: 1.125rem; 
+            box-shadow: 0 4px 15px -3px rgba(0,0,0,0.05); 
+            border: 1px solid #f1f5f9; 
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); 
+            animation: fadeInUpNews 0.5s ease forwards; 
+            opacity: 0; 
+            transform: translateY(20px); 
+            cursor: pointer;
+        }
+        .modern-news-item:active { 
+            transform: scale(0.95); 
+            background: #f8fafc; 
+            border-color: #e2e8f0;
+        }
+        .modern-news-item:nth-child(1) { animation-delay: 0.1s; }
+        .modern-news-item:nth-child(2) { animation-delay: 0.2s; }
+        .modern-news-item:nth-child(3) { animation-delay: 0.3s; }
+        
+        .modern-news-img { 
+            width: 95px; 
+            height: 95px; 
+            border-radius: 0.85rem; 
+            object-fit: cover; 
+            flex-shrink: 0; 
+        }
+        .modern-news-info { 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            flex-grow: 1;
+        }
+        .modern-news-info h4 { 
+            font-weight: 700; 
+            color: #0f172a; 
+            font-size: 0.9rem; 
+            line-height: 1.35; 
+            margin-bottom: 0.5rem; 
+            display: -webkit-box; 
+            -webkit-line-clamp: 2; 
+            -webkit-box-orient: vertical; 
+            overflow: hidden; 
+        }
+        .modern-news-info p { 
+            font-size: 0.75rem; 
+            color: #64748b; 
+            margin-top: auto; 
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        @keyframes fadeInUpNews {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* ========================================== */
+/* NEWS PAGE - CNN & DETIK STYLE TABS & LAYOUT */
+/* ========================================== */
+.news-app-header {
+    position: sticky;
+    top: 72px; /* Menyesuaikan batas bawah header minimalis */
+    background: #ffffff;
+    z-index: 90;
+    margin: -1.5rem -30px 1rem -30px;
+    padding: 0.75rem 0 0.5rem 0;
+    border-bottom: 1px solid #e2e8f0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+}
+
+.news-app-tabs {
+    display: flex;
+    padding: 0 5px 0 5px;
+    gap: 0.5rem;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+}
+.news-app-tabs::-webkit-scrollbar {
+    display: none;
+}
+
+.news-tab-item {
+    padding: 0.45rem 0.95rem;
+    border-radius: 9999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #64748b;
+    background: #f1f5f9;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.news-tab-item.active {
+    background: #dc2626; /* Merah khas Detik / CNN */
+    color: #ffffff;
+    box-shadow: 0 2px 8px rgba(220, 38, 38, 0.3);
+}
+
+/* Breaking / Flash News Bar */
+.detik-breaking-bar {
+    display: flex;
+    align-items: center;
+    background: #fef2f2;
+    border: 1px solid #fee2e2;
+    border-radius: 0.75rem;
+    padding: 0.5rem 0.75rem;
+    margin: 0 -20px 1.25rem -20px;
+    gap: 0.5rem;
+}
+.detik-breaking-tag {
+    background: #dc2626;
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 900;
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.25rem;
+    text-transform: uppercase;
+    flex-shrink: 0;
+}
+.detik-breaking-text {
+    font-size: 0.75rem;
+    color: #991b1b;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Hero Headline Utama */
+.detik-hero-card {
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+    margin: 0 -20px 1.25rem -20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    cursor: pointer;
+}
+.detik-hero-img-box {
+    position: relative;
+    width: 100%;
+    height: 210px;
+}
+.detik-hero-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.detik-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(15,23,42,0.95) 0%, rgba(15,23,42,0.3) 60%, transparent 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1rem;
+}
+.detik-hero-tag {
+    align-self: flex-start;
+    background: #dc2626;
+    color: #ffffff;
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 0.25rem 0.6rem;
+    border-radius: 0.25rem;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+}
+.detik-hero-title {
+    color: #ffffff;
+    font-size: 1.05rem;
+    font-weight: 800;
+    line-height: 1.35;
+    margin-bottom: 0.4rem;
+}
+.detik-hero-meta {
+    font-size: 0.7rem;
+    color: #94a3b8;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Feed List Berita (Model Samping Detik/CNN) */
+.detik-news-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+.detik-news-card {
+    display: flex;
+    gap: 0.85rem;
+    margin: 0 -20px 0 -20px;
+    background: transparent;
+    border-bottom: 1px solid #f1f5f9;
+    padding: 0 10px 0.85rem 10px;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+.detik-news-card:active {
+    opacity: 0.7;
+}
+.detik-news-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.detik-news-category {
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: #dc2626;
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+}
+.detik-news-title {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #0f172a;
+    line-height: 1.35;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 0.35rem;
+}
+.detik-news-time {
+    font-size: 0.7rem;
+    color: #94a3b8;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+.detik-news-thumb {
+    width: 100px;
+    height: 75px;
+    border-radius: 0.5rem;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+#openNewsDetail(1) {z-index:}
